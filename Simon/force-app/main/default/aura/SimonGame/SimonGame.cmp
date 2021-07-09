@@ -3,6 +3,9 @@
     <aura:attribute name="GameStarted" type="Boolean" default="false"/>
     <aura:attribute name="ButtonsNotPushable" type="Boolean" default="true"/>
     <aura:attribute name="CurrIndex" type="Integer" default="0"/>
+    <aura:attribute name="CurrDispIndex" type="Integer" default="0"/>
+    <aura:attribute name="CurrCombo" type="Integer" default="0"/>
+    
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
     
     <div id="GameContainer">
@@ -34,7 +37,7 @@
         
         <div class="slds-align_absolute-center">
             <lightning:button disabled="{!v.GameStarted}" label="Start Game" title="Start Game" onclick="{!c.startGame}"/>
-            <lightning:button disabled="true" label="Stop Game" title="Stop Game" onclick="{!c.startGame}"/>
+            <lightning:button disabled="false" label="Stop Game" title="Stop Game" onclick="{!c.gameEnd}"/>
         </div>
         
     </div>
