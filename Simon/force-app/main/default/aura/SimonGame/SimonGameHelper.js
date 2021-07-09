@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////
 //
-//  Name: SimonGameController
+//  Name: SimonGameHelper
 //  Author: Kameron Fincher
 //  Description: Helper for SimonGame that 
 //  handles all logic and input for the game.
@@ -9,7 +9,7 @@
 
 ({
     // clears game/reinits everything
-    init : function(component, helper) {
+    init : function(component, helper, ignore) {
         var rows = [];
         component.set("v.GeneratedList",rows);
         component.set("v.CurrIndex",0);
@@ -17,6 +17,22 @@
         component.set("v.CurrCombo",0);
         component.set("v.ButtonsNotPushable",true);
         component.set("v.GameStarted",false);
+        
+        // The highscore from gameEnd may not be in the database yet, so this can't run
+        // This just sets the highscore text to whatever the highest score recorded in the org is
+        if(ignore==null){
+            var action = component.get("c.game")
+            
+            action.setCallback(this,function(response){
+                if(response.getState()==="SUCCESS"){
+                    component.set("v.HighScore",response.getReturnValue());
+                    var divCard = document.getElementById("HighScoreText");
+                    divCard.innerHTML = "Highscore: "+component.get("v.HighScore")+"&emsp;";
+                }
+            })
+            
+            $A.enqueueAction(action);
+        }
     },
     
     // start sequence of events that eventually leads to enableInput
@@ -99,6 +115,12 @@
                 
                 // Decides if game increase diff or continues
                 if(index+1>=rows.length){
+                    if(rows.length>component.get("v.HighScore")){
+                        component.set("v.HighScore",rows.length);
+                        var divCard2 = document.getElementById("HighScoreText");
+                		divCard2.innerHTML = "Highscore: "+rows.length+"&emsp;";
+                    }
+                    
                     helper.incDiff(component);
                     component.set("v.CurrDispIndex",0);
                     component.set("v.CurrIndex",0);
@@ -109,6 +131,8 @@
                     divCard.innerHTML = "Sequences cleared: "+component.get("v.CurrCombo");
                     divCard = document.getElementById("DisplayText");
                     divCard.innerHTML = "Showing Sequence..."; 
+                    
+                    
                     
                     helper.playSequence(component, helper);
                 }else{
@@ -124,13 +148,24 @@
     
     // First portion of reset that clears everything out
     gameEnd : function(component, helper){
+        
+        var rows = component.get("v.GeneratedList");
+        if(rows.length>0){
+            var action = component.get("c.insertScore");
+            
+            action.setParams({
+                "num": rows.length-1
+            });
+            
+            $A.enqueueAction(action);
+        }
         var divCard = document.getElementById("ComboText");
         divCard.innerHTML = "Sequences cleared: 0";
         divCard = document.getElementById("DisplayText");
         divCard.innerHTML = "Click Start to Play!";
         for(var i = 0;i<4;i++)
             document.getElementById(helper.returnColor(i)).style.setProperty('opacity', .4);
-        this.init(component, helper);
+        this.init(component, helper, "ignore");
     },
     
     // Plays an animation to inc opacity, and leads into flashIconDown (below)

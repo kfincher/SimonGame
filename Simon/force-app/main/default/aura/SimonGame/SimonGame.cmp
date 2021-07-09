@@ -7,13 +7,14 @@
 
 -->
 
-<aura:component >
+<aura:component controller="SimonGameController">
     <aura:attribute name="GeneratedList" type="List"/>
     <aura:attribute name="GameStarted" type="Boolean" default="false"/>
     <aura:attribute name="ButtonsNotPushable" type="Boolean" default="true"/>
     <aura:attribute name="CurrIndex" type="Integer" default="0"/>
     <aura:attribute name="CurrDispIndex" type="Integer" default="0"/>
     <aura:attribute name="CurrCombo" type="Integer" default="0"/>
+    <aura:attribute name="HighScore" type="Integer" default="0"/>
     
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
     
@@ -60,6 +61,7 @@
         <!--Player input section-->
         
         <div class="slds-align_absolute-center">
+            <div id="HighScoreText">High Score: 0&emsp;</div>
             <div id="ComboText">Sequences cleared: 0</div>
         </div>
     </div>
