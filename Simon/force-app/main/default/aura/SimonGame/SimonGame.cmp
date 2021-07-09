@@ -1,0 +1,41 @@
+<aura:component >
+    <aura:attribute name="GeneratedList" type="List"/>
+    <aura:attribute name="GameStarted" type="Boolean" default="false"/>
+    <aura:attribute name="ButtonsNotPushable" type="Boolean" default="true"/>
+    <aura:attribute name="CurrIndex" type="Integer" default="0"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <div id="GameContainer">
+        <div class="slds-align_absolute-center slds-text-heading_large" id="DisplayText">Click Start to Play!</div>
+        <div class="slds-align_absolute-center">
+        <div class="slds-grid slds-gutters" style="height:80px;width:500px">
+        
+            <div id="IDRed" class="color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-red"/>
+                
+            
+            
+            <div id="IDBlue" class= "color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-blue"/>
+          
+            <div id="IDGreen" class= "color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-green"/>
+              
+
+            <div id="IDYellow" class= "color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-yellow"/>
+         
+       
+        </div>
+        </div>
+        
+        <div class="slds-align_absolute-center">
+            <lightning:button disabled="{!v.ButtonsNotPushable}" label="Red" title="Red" onclick="{!c.userInputRed}"/>
+            <lightning:button disabled="{!v.ButtonsNotPushable}" label="Blue" title="Blue" onclick="{!c.userInputBlue}"/>
+            <lightning:button disabled="{!v.ButtonsNotPushable}" label="Green" title="Green" onclick="{!c.userInputGreen}"/>
+            <lightning:button disabled="{!v.ButtonsNotPushable}" label="Yellow" title="Yellow" onclick="{!c.userInputYellow}"/>       
+        </div>
+        
+        <div class="slds-align_absolute-center">
+            <lightning:button disabled="{!v.GameStarted}" label="Start Game" title="Start Game" onclick="{!c.startGame}"/>
+            <lightning:button disabled="true" label="Stop Game" title="Stop Game" onclick="{!c.startGame}"/>
+        </div>
+        
+    </div>
+</aura:component>

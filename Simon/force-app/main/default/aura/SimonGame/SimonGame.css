@@ -1,0 +1,27 @@
+#RedFlash.THIS {
+    background-color:red;
+}
+#BlueFlash.THIS {
+    background-color:blue;
+}
+#GreenFlash.THIS {
+    background-color:green;
+}
+.THIS .slds-theme_backgroundColor-red {
+     background-color:red;
+}
+.THIS .slds-theme_backgroundColor-blue {
+    background-color:blue; 
+}
+.THIS .slds-theme_backgroundColor-green {
+     background-color:green;
+}
+.THIS .slds-theme_backgroundColor-yellow {
+    background-color:yellow;
+}
+.THIS .color-box {
+    opacity:.4;
+}
+#GameContainer.THIS {
+	padding: 2.5% 5% 0% 2.5%;
+}
