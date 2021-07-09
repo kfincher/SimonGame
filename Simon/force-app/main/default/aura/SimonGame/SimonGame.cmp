@@ -9,36 +9,44 @@
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
     
     <div id="GameContainer">
-        <div class="slds-align_absolute-center slds-text-heading_large" id="DisplayText">Click Start to Play!</div>
+        <div class="slds-align_absolute-center slds-text-heading_large slds-m-bottom_medium" id="DisplayText">Click Start to Play!</div>
         <div class="slds-align_absolute-center">
-        <div class="slds-grid slds-gutters" style="height:80px;width:500px">
+        <div class="slds-grid slds-gutters slds-m-bottom_medium" style="height:80px;width:500px">
         
-            <div id="IDRed" class="color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-red"/>
+            <div id="IDRed" class="color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-red">
+            	<div class="slds-align_absolute-center" style="height:5rem">o</div>
+            </div>
                 
             
             
-            <div id="IDBlue" class= "color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-blue"/>
+            <div id="IDBlue" class= "color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-blue">
+                <div class="slds-align_absolute-center" style="height:5rem">o</div>
+            </div>
           
-            <div id="IDGreen" class= "color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-green"/>
-              
+            <div id="IDGreen" class= "color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-green">
+				<div class="slds-align_absolute-center" style="height:5rem">o</div>
+            </div>              
 
-            <div id="IDYellow" class= "color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-yellow"/>
-         
+            <div id="IDYellow" class= "color-box slds-col slds-size_3-of-12 slds-theme_backgroundColor-yellow">
+         		<div class="slds-align_absolute-center" style="height:5rem">o</div>
+            </div>
        
         </div>
         </div>
         
-        <div class="slds-align_absolute-center">
+        <div class="slds-align_absolute-center slds-m-bottom_x-small">
             <lightning:button disabled="{!v.ButtonsNotPushable}" label="Red" title="Red" onclick="{!c.userInputRed}"/>
             <lightning:button disabled="{!v.ButtonsNotPushable}" label="Blue" title="Blue" onclick="{!c.userInputBlue}"/>
             <lightning:button disabled="{!v.ButtonsNotPushable}" label="Green" title="Green" onclick="{!c.userInputGreen}"/>
             <lightning:button disabled="{!v.ButtonsNotPushable}" label="Yellow" title="Yellow" onclick="{!c.userInputYellow}"/>       
         </div>
         
-        <div class="slds-align_absolute-center">
+        <div class="slds-align_absolute-center slds-m-bottom_x-small">
             <lightning:button disabled="{!v.GameStarted}" label="Start Game" title="Start Game" onclick="{!c.startGame}"/>
             <lightning:button disabled="false" label="Stop Game" title="Stop Game" onclick="{!c.gameEnd}"/>
         </div>
-        
+		<div class="slds-align_absolute-center">
+			<div id="ComboText">Sequences cleared: 0</div>
+        </div>
     </div>
 </aura:component>

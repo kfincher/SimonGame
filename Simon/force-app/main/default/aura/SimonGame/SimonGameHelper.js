@@ -6,6 +6,7 @@
         component.set("v.GeneratedList",rows);
         component.set("v.CurrIndex",0);
         component.set("v.CurrDispIndex",0);
+        component.set("v.CurrCombo",0);
         component.set("v.ButtonsNotPushable",true);
         component.set("v.GameStarted",false);
         
@@ -37,9 +38,7 @@
                     if(countdown>=0){
                         helper.recursiveStartGame(helper,countdown, divCard, component);
                     }else{
-                        console.log("here");
-                        divCard.innerHTML = "GO!";
-                        
+                        divCard.innerHTML = "Showing Sequence..."; 
                         helper.incDiff(component);	
                         helper.playSequence(component, helper);
                     }
@@ -57,23 +56,32 @@
                 helper.flashIconUp(component, helper.returnColor(rows[index]), 75, .4, helper, helper.playSequence) // uses the number at the index to get the ID using the helper method
             }else{
                 console.log('made it here 2');
-                helper.testFunc(component);
+                helper.testFunc(component, helper);
             }
         }
     },
-    testFunc : function(component){
-        console.log('works');
+    testFunc : function(component, helper){
+        var divCard = document.getElementById("DisplayText");
+        divCard.innerHTML = "Go!";
         component.set("v.ButtonsNotPushable",false);
+    },
+    removeText : function(component){
+        var divCard = document.getElementById("DisplayText");
+        
+        window.setTimeout(function(){
+            if(component.get("v.GameStarted")){
+                divCard.innerHTML = "...";
+            }
+        },500)
     },
     incDiff : function(component){
         if(component.get("v.GameStarted")){
             var rows = component.get("v.GeneratedList");
             rows.push(Math.floor(Math.random()*4));
-            
             component.set("v.GeneratedList",rows);
-            console.log(rows);
         }
     },
+    
     // plays animation
     handlePlayerInput : function(component, userInput, helper){
         helper.flashIconUp(component, helper.returnColor(userInput), 20, .4, helper, helper.handlePlayerInputPart2, userInput)
@@ -90,6 +98,8 @@
             
             if(userInput==rows[index]){
                 console.log("correct!");
+                var divCard = document.getElementById("DisplayText");
+                divCard.innerHTML = "Correct color!";
                 
                 // Decides if game increase diff or resets
                 if(index+1>=rows.length){
@@ -97,7 +107,14 @@
                     component.set("v.CurrDispIndex",0);
                     component.set("v.CurrIndex",0);
                     component.set("v.ButtonsNotPushable",true);
-                    console.log('tried to goes to second phase')
+                    
+                    component.set("v.CurrCombo",component.get("v.CurrCombo") + 1);
+                    var divCard = document.getElementById("ComboText");
+                    divCard.innerHTML = "Sequences cleared: "+component.get("v.CurrCombo");
+                    
+                    divCard = document.getElementById("DisplayText");
+                    
+                    divCard.innerHTML = "Showing Sequence..."; 
                     helper.playSequence(component, helper);
                 }else{
                     index++;
@@ -111,10 +128,12 @@
         }
     },
     gameEnd : function(component, helper){
-        var divCard = document.getElementById("DisplayText");
+        var divCard = document.getElementById("ComboText");
+        divCard.innerHTML = "Sequences cleared: 0";
+        divCard = document.getElementById("DisplayText");
         divCard.innerHTML = "Click Start to Play!";
         for(var i = 0;i<4;i++)
-        	document.getElementById(helper.returnColor(i)).style.setProperty('opacity', .4);
+            document.getElementById(helper.returnColor(i)).style.setProperty('opacity', .4);
         this.init(component, helper);
     },
     // play animation to inc opacity, and leads into flashIconDown (below)
@@ -126,7 +145,7 @@
                 if(component.get("v.GameStarted")){
                     document.getElementById(iconID).style.setProperty('opacity', opacity);
                     opacity+=.05
-                    if(opacity>=1){
+                    if(opacity>=.95){
                         helper.flashIconDown(component, iconID, time, opacity, helper, func, userInput);
                     }else{
                         helper.flashIconUp(component, iconID, time, opacity, helper, func, userInput);
@@ -172,6 +191,5 @@
                 break;
         }
         return color;
-        
     }
 })
