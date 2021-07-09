@@ -1,12 +1,12 @@
-#RedFlash.THIS {
-    background-color:red;
-}
-#BlueFlash.THIS {
-    background-color:blue;
-}
-#GreenFlash.THIS {
-    background-color:green;
-}
+/*
+
+  Name: SimonGame
+  Author: Kameron Fincher
+  Description: CSS styling added on top
+  of SLDS stylings
+
+*/
+
 .THIS .slds-theme_backgroundColor-red {
      background-color:red;
 }
@@ -27,5 +27,5 @@
     border: 5px solid black;
     width:50%;
 	padding: 2.5% 5% 2% 2.5%;
-    background-color:grey;
+    background-color:#adadad;
 }

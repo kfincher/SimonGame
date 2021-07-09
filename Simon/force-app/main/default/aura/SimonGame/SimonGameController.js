@@ -1,3 +1,12 @@
+/////////////////////////////////////////////////
+//
+//  Name: SimonGameController
+//  Author: Kameron Fincher
+//  Description: Controller for SimonGame that 
+//  redirects to the helper function equivalents.
+//
+/////////////////////////////////////////////////
+
 ({
 	init : function(component, event, helper) {
 		helper.init(component, helper);
@@ -5,8 +14,11 @@
     startGame : function(component, event, helper) {
 		helper.startGame(component, event);
 	},
+    gameEnd: function(component, event, helper) {
+		helper.gameEnd(component, helper);
+	},
     
-    // Input block that's tied to the color buttons
+    // Input blocks that are tied to the color buttons
     userInputRed : function(component, event, helper) {
 		helper.handlePlayerInput(component, 0, helper);
 	},
@@ -19,9 +31,5 @@
     userInputYellow : function(component, event, helper) {
 		helper.handlePlayerInput(component, 3, helper);
 	},
-    gameEnd: function(component, event, helper) {
-		helper.gameEnd(component, helper);
-	},
-    
-    
+         
 })
