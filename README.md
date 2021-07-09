@@ -1,5 +1,5 @@
 # SimonGame
-A project that recreates the Simon game, where players have to match a sequence of colors shown to them. If they fail to do so, the game ends. Otherwise, the game continues to increase in difficulty
+A project that recreates the Simon game, where players have to match a sequence of colors shown to them. If they fail to do so, the game ends. Otherwise, the game continues to increase in difficulty. (If you're fine with a longer set-up, go to the highscore branch)
 ![alt text](https://i.imgur.com/KyhtEv7.png)
 # How to install (with Salesforce Extension Pack installed)
 1. Clone repo with: `git clone https://github.com/kfincher/SimonGame`
